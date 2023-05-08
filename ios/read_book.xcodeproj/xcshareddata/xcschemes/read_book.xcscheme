@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "read_book.app"
-               BlueprintName = "read_book"
-               ReferencedContainer = "container:read_book.xcodeproj">
+               BuildableName = "red_book.app"
+               BlueprintName = "red_book"
+               ReferencedContainer = "container:red_book.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "read_bookTests.xctest"
-               BlueprintName = "read_bookTests"
-               ReferencedContainer = "container:read_book.xcodeproj">
+               BuildableName = "red_bookTests.xctest"
+               BlueprintName = "red_bookTests"
+               ReferencedContainer = "container:red_book.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "read_book.app"
-            BlueprintName = "read_book"
-            ReferencedContainer = "container:read_book.xcodeproj">
+            BuildableName = "red_book.app"
+            BlueprintName = "red_book"
+            ReferencedContainer = "container:red_book.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "read_book.app"
-            BlueprintName = "read_book"
-            ReferencedContainer = "container:read_book.xcodeproj">
+            BuildableName = "red_book.app"
+            BlueprintName = "red_book"
+            ReferencedContainer = "container:red_book.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

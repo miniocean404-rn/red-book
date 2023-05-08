@@ -1,4 +1,4 @@
-package com.read_book;
+package com.red_book;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

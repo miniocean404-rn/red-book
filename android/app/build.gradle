@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.read_book"
+    namespace "com.red_book"
     defaultConfig {
-        applicationId "com.read_book"
+        applicationId "com.red_book"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

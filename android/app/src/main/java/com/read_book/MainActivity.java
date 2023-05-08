@@ -1,4 +1,4 @@
-package com.read_book;
+package com.red_book;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -13,7 +13,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "read_book";
+    return "red_book";
   }
 
   /**
