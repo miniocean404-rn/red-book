@@ -21,6 +21,7 @@ declare global {
   declare module '*.gif'
   declare module '*.bmp'
   declare module '*.tiff'
+  declare module '*.webp'
 }
 
 declare module 'react-native' {

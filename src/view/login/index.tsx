@@ -1,16 +1,24 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity, Linking } from 'react-native'
+import { Image, StyleSheet, Text, View, TouchableOpacity, Linking, TextInput, LayoutAnimation } from 'react-native'
 import React, { useState } from 'react'
 import logo from '@/assets/icon_main_logo.png'
 import icon_unselected from '@/assets/icon_unselected.png'
 import icon_selected from '@/assets/icon_selected.png'
 import icon_arrow from '@/assets/icon_arrow.png'
 import icon_wx_small from '@/assets/icon_wx_small.png'
+import icon_triangle from '@/assets/icon_triangle.png'
+import icon_eye_open from '@/assets/icon_eye_open.png'
+import icon_eye_close from '@/assets/icon_eye_close.png'
+import icon_exchange from '@/assets/icon_exchange.png'
+import icon_wx from '@/assets/icon_wx.png'
+import icon_qq from '@/assets/icon_qq.webp'
+import icon_close_modal from '@/assets/icon_close_modal.png'
 
 type LoginTypeDeclare = 'quick' | 'input'
 
 const Login = () => {
   const [loginType, setLoginType] = useState<LoginTypeDeclare>('quick')
   const [isCheck, setIsCheck] = useState<boolean>(false)
+  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false)
 
   const quickRender = () => {
     const styles = StyleSheet.create({
@@ -108,6 +116,7 @@ const Login = () => {
     }
 
     const otherLoginOnPress = () => {
+      LayoutAnimation.easeInEaseOut()
       setLoginType((type: LoginTypeDeclare) => {
         if (type === 'quick') {
           return 'input'
@@ -166,7 +175,7 @@ const Login = () => {
         height: '100%',
         flexDirection: 'column',
         alignItems: 'center',
-        paddingHorizontal: 56,
+        paddingHorizontal: 48,
       },
       pwdLogin: {
         fontSize: 24,
@@ -179,12 +188,202 @@ const Login = () => {
         color: '#BBB',
         marginTop: 6,
       },
+      phoneLayout: {
+        width: '100%',
+        height: 60,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
+        marginTop: 28,
+      },
+      triangle: {
+        width: 12,
+        height: 6,
+        marginLeft: 6,
+      },
+      pre86: {
+        fontSize: 24,
+        color: '#bbb',
+      },
+      phoneInput: {
+        flex: 1,
+        height: 60,
+        backgroundColor: 'transparent',
+        textAlign: 'left',
+        textAlignVertical: 'center',
+        fontSize: 24,
+        color: '#333',
+        marginLeft: 16,
+      },
+      pwdLayout: {
+        marginTop: 8,
+      },
+      pwdInput: {
+        marginLeft: 0,
+        marginRight: 16,
+      },
+      icon_eye: {
+        width: 30,
+        height: 30,
+      },
+      changeLayout: {
+        width: '100%',
+        marginTop: 10,
+        alignItems: 'center',
+        flexDirection: 'row',
+      },
+      exchange: {
+        width: 16,
+        height: 16,
+      },
+      codeLogTxt: {
+        fontSize: 14,
+        color: '#303080',
+        flex: 1,
+        marginLeft: 4,
+      },
+      forgetPwdTxt: {
+        fontSize: 14,
+        color: '#303080',
+      },
+      loginButton: {
+        width: '100%',
+        height: 56,
+        borderRadius: 28,
+        backgroundColor: '#ff2442',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+      },
+      loginTxt: {
+        fontSize: 20,
+        color: 'white',
+      },
+      protocolLayout: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingBottom: 40,
+        marginTop: 12,
+      },
+      logo: {
+        width: 180,
+        height: 95,
+        resizeMode: 'contain',
+        position: 'absolute',
+        top: 170,
+      },
+      radioButton: {
+        width: 20,
+        height: 20,
+      },
+      labelTxt: {
+        fontSize: 12,
+        color: '#999',
+        marginLeft: 6,
+      },
+      protocolTxt: {
+        fontSize: 12,
+        color: '#1020ff',
+        marginLeft: 6,
+      },
+      WxQQLayout: {
+        width: '100%',
+        flexDirection: 'row',
+        marginTop: 54,
+        justifyContent: 'center',
+      },
+      iconWX: {
+        width: 50,
+        height: 50,
+        marginRight: 60,
+      },
+      iconQQ: {
+        width: 50,
+        height: 50,
+        marginLeft: 60,
+      },
+      closeButton: {
+        position: 'absolute',
+        left: 36,
+        top: 24,
+      },
+      closeImg: {
+        width: 28,
+        height: 28,
+      },
     })
 
     return (
       <View style={styles.root}>
         <Text style={styles.pwdLogin}>密码登录</Text>
         <Text style={styles.tip}>未注册的手机号登录成功后将自动注册</Text>
+
+        <View style={styles.phoneLayout}>
+          <Text style={styles.pre86}>86</Text>
+          <Image style={styles.triangle} source={icon_triangle}></Image>
+
+          <TextInput
+            style={styles.phoneInput}
+            placeholderTextColor={'#bbb'}
+            placeholder="请输入手机号码"
+            autoFocus={false}
+          />
+        </View>
+
+        <View style={[styles.phoneLayout, styles.pwdLayout]}>
+          <TextInput
+            style={[styles.phoneInput, styles.pwdInput]}
+            placeholderTextColor={'#bbb'}
+            placeholder="请输入手机密码"
+            autoFocus={false}
+          />
+
+          <TouchableOpacity
+            onPress={() => {
+              setIsEyeOpen(!isEyeOpen)
+            }}
+          >
+            <Image style={styles.icon_eye} source={isEyeOpen ? icon_eye_open : icon_eye_close}></Image>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.changeLayout}>
+          <Image style={styles.exchange} source={icon_exchange}></Image>
+          <Text style={styles.codeLogTxt}>验证码登录</Text>
+          <Text style={styles.forgetPwdTxt}>忘记密码 ?</Text>
+        </View>
+
+        <TouchableOpacity style={styles.loginButton} activeOpacity={0.7}>
+          <Text style={styles.loginTxt}>登录</Text>
+        </TouchableOpacity>
+
+        <View style={styles.protocolLayout}>
+          <TouchableOpacity onPress={() => {}}>
+            <Image style={styles.radioButton} source={isCheck ? icon_selected : icon_unselected}></Image>
+          </TouchableOpacity>
+          <Text style={styles.labelTxt}>我已阅读并同意</Text>
+
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={styles.protocolTxt}>《用户协议》 和 《隐私政策》</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.WxQQLayout}>
+          <Image style={styles.iconWX} source={icon_wx}></Image>
+          <Image style={styles.iconQQ} source={icon_qq}></Image>
+        </View>
+
+        <TouchableOpacity
+          style={styles.closeButton}
+          onPress={() => {
+            LayoutAnimation.easeInEaseOut()
+            setLoginType('quick')
+          }}
+        >
+          <Image style={styles.closeImg} source={icon_close_modal}></Image>
+        </TouchableOpacity>
       </View>
     )
   }
