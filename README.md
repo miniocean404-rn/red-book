@@ -27,3 +27,7 @@
 
    export default new UserStore()
    ```
+
+### React Native Debugger 使用
+
+博客：https://blog.csdn.net/A15029296293/article/details/129841557

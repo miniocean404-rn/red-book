@@ -19,7 +19,7 @@ export const UserAgent =
 export const ContentType = 'application/x-www-form-urlencoded'
 
 export const request = axios.create({
-  baseURL: 'http://192.168.31.5:7002',
+  baseURL: 'http://192.168.31.5:7001',
   timeout: 5000,
   withCredentials: true,
   responseType: 'json', //文档设置为document自动转化为DOM、text为文字、blob等
