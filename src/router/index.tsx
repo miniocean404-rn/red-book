@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { TransitionPresets, createStackNavigator } from '@react-navigation/stack'
 import Welcome from '@/view/welcome'
 import Login from '@/view/login'
+import Home from '@/view/home'
 
 const Stack = createStackNavigator<RouterParamList>()
 
@@ -14,7 +15,7 @@ const Router = () => {
         {/* 管理子屏幕的导航器组件 */}
         <Stack.Navigator
           // initialRouteName 默认打开的页面
-          initialRouteName={'Login'}
+          initialRouteName={'Welcome'}
           screenOptions={{
             cardStyle: {
               // 提高页面导航栈层级，避免出现 B 页面透过能看到 A 页面情况
@@ -38,6 +39,16 @@ const Router = () => {
           <Stack.Screen
             name={'Login'}
             component={Login}
+            options={{
+              headerShown: false,
+              // 设置预设的页面跳转动画
+              ...TransitionPresets.SlideFromRightIOS,
+            }}
+          ></Stack.Screen>
+
+          <Stack.Screen
+            name={'Home'}
+            component={Home}
             options={{
               headerShown: false,
               // 设置预设的页面跳转动画

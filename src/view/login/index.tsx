@@ -1,4 +1,13 @@
-import { Image, StyleSheet, Text, View, TouchableOpacity, Linking, TextInput, LayoutAnimation } from 'react-native'
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Linking,
+  TextInput,
+  LayoutAnimation,
+} from 'react-native'
 import React, { useState } from 'react'
 import logo from '@/assets/icon_main_logo.png'
 import icon_unselected from '@/assets/icon_unselected.png'
@@ -12,13 +21,22 @@ import icon_exchange from '@/assets/icon_exchange.png'
 import icon_wx from '@/assets/icon_wx.png'
 import icon_qq from '@/assets/icon_qq.webp'
 import icon_close_modal from '@/assets/icon_close_modal.png'
+import { RouterParamList } from '@/router/typings/stack-params-list'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { formartPhone, replaceBlank } from '@/utils/string'
+import { request } from '@/utils/request/request'
 
 type LoginTypeDeclare = 'quick' | 'input'
 
 const Login = () => {
+  const navigation = useNavigation<StackNavigationProp<RouterParamList>>()
+
   const [loginType, setLoginType] = useState<LoginTypeDeclare>('quick')
   const [isCheck, setIsCheck] = useState<boolean>(false)
-  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false)
+  const [isEyeOpen, setIsEyeOpen] = useState<boolean>(true)
+  const [phone, setPhone] = useState<string>('')
+  const [pwd, setPwd] = useState<string>('')
 
   const quickRender = () => {
     const styles = StyleSheet.create({
@@ -103,11 +121,10 @@ const Login = () => {
       oneKeyLoginTxt: {
         fontSize: 18,
         color: 'white',
-        marginLeft: 16,
       },
     })
 
-    const radioOnPress = () => {
+    const radioOnPress = async () => {
       setIsCheck(!isCheck)
     }
 
@@ -130,7 +147,10 @@ const Login = () => {
       <View style={styles.root}>
         <View style={styles.protocolLayout}>
           <TouchableOpacity onPress={radioOnPress}>
-            <Image style={styles.radioButton} source={isCheck ? icon_selected : icon_unselected}></Image>
+            <Image
+              style={styles.radioButton}
+              source={isCheck ? icon_selected : icon_unselected}
+            ></Image>
           </TouchableOpacity>
           <Text style={styles.labelTxt}>我已阅读并同意</Text>
 
@@ -139,7 +159,10 @@ const Login = () => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.otherLoginButton} onPress={otherLoginOnPress}>
+        <TouchableOpacity
+          style={styles.otherLoginButton}
+          onPress={otherLoginOnPress}
+        >
           <Text style={styles.otherLoginTxt}>其他登录方式</Text>
           <Image style={styles.icon_arrow} source={icon_arrow}></Image>
         </TouchableOpacity>
@@ -256,6 +279,15 @@ const Login = () => {
         alignItems: 'center',
         marginTop: 20,
       },
+      loginButtonDisable: {
+        width: '100%',
+        height: 56,
+        borderRadius: 28,
+        backgroundColor: '#dddddd',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+      },
       loginTxt: {
         fontSize: 20,
         color: 'white',
@@ -315,13 +347,35 @@ const Login = () => {
       },
     })
 
+    const loginOnPress = async () => {
+      const res = await request.get('/user/login', {
+        data: {
+          name: replaceBlank(phone),
+          pwd: '123456',
+        },
+      })
+
+      console.log(res)
+
+      // navigation.replace('Home')
+    }
+
+    const phoneOnChangeText = (v: string) => {
+      setPhone(formartPhone(v))
+    }
+    const pwdOnChangeText = (v: string) => {
+      setPwd(v)
+    }
+
+    const canLogin = phone?.length === 13 && pwd?.length === 6
+
     return (
       <View style={styles.root}>
         <Text style={styles.pwdLogin}>密码登录</Text>
         <Text style={styles.tip}>未注册的手机号登录成功后将自动注册</Text>
 
         <View style={styles.phoneLayout}>
-          <Text style={styles.pre86}>86</Text>
+          <Text style={styles.pre86}>+86</Text>
           <Image style={styles.triangle} source={icon_triangle}></Image>
 
           <TextInput
@@ -329,6 +383,10 @@ const Login = () => {
             placeholderTextColor={'#bbb'}
             placeholder="请输入手机号码"
             autoFocus={false}
+            keyboardType="number-pad"
+            maxLength={13}
+            value={phone}
+            onChangeText={phoneOnChangeText}
           />
         </View>
 
@@ -338,6 +396,11 @@ const Login = () => {
             placeholderTextColor={'#bbb'}
             placeholder="请输入手机密码"
             autoFocus={false}
+            keyboardType="number-pad"
+            maxLength={6}
+            value={pwd}
+            secureTextEntry={!isEyeOpen}
+            onChangeText={pwdOnChangeText}
           />
 
           <TouchableOpacity
@@ -345,7 +408,10 @@ const Login = () => {
               setIsEyeOpen(!isEyeOpen)
             }}
           >
-            <Image style={styles.icon_eye} source={isEyeOpen ? icon_eye_open : icon_eye_close}></Image>
+            <Image
+              style={styles.icon_eye}
+              source={isEyeOpen ? icon_eye_open : icon_eye_close}
+            ></Image>
           </TouchableOpacity>
         </View>
 
@@ -355,13 +421,20 @@ const Login = () => {
           <Text style={styles.forgetPwdTxt}>忘记密码 ?</Text>
         </View>
 
-        <TouchableOpacity style={styles.loginButton} activeOpacity={0.7}>
+        <TouchableOpacity
+          style={canLogin ? styles.loginButton : styles.loginButtonDisable}
+          activeOpacity={canLogin ? 0.7 : 1}
+          onPress={(canLogin && loginOnPress) || undefined}
+        >
           <Text style={styles.loginTxt}>登录</Text>
         </TouchableOpacity>
 
         <View style={styles.protocolLayout}>
           <TouchableOpacity onPress={() => {}}>
-            <Image style={styles.radioButton} source={isCheck ? icon_selected : icon_unselected}></Image>
+            <Image
+              style={styles.radioButton}
+              source={isCheck ? icon_selected : icon_unselected}
+            ></Image>
           </TouchableOpacity>
           <Text style={styles.labelTxt}>我已阅读并同意</Text>
 
