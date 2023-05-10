@@ -4,13 +4,19 @@ import logo from '@/assets/icon_main_logo.png'
 import { useNavigation } from '@react-navigation/native'
 import { RouterParamList } from '@/router/typings/stack-params-list'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { load } from '@/utils/storage'
 
 const Welcome = () => {
   const navigation = useNavigation<StackNavigationProp<RouterParamList>>()
 
   useEffect(() => {
-    setTimeout(() => {
-      navigation.replace('Login')
+    setTimeout(async () => {
+      const res = await load('userInfo')
+      if (!res) {
+        navigation.replace('Login')
+      } else {
+        navigation.replace('Home')
+      }
     }, 3000)
 
     return () => {}

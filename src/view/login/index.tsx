@@ -7,6 +7,7 @@ import {
   Linking,
   TextInput,
   LayoutAnimation,
+  ToastAndroid,
 } from 'react-native'
 import React, { useState } from 'react'
 import logo from '@/assets/icon_main_logo.png'
@@ -25,8 +26,9 @@ import { RouterParamList } from '@/router/typings/stack-params-list'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { formartPhone, replaceBlank } from '@/utils/string'
-import { request } from '@/utils/request/request'
+import { request } from '@/utils/request'
 import { getUser } from '@/api/login'
+import userStore from '@/store/user-store'
 
 type LoginTypeDeclare = 'quick' | 'input'
 
@@ -349,14 +351,19 @@ const Login = () => {
     })
 
     const loginOnPress = async () => {
-      const [_, res] = await getUser({
-        name: 'dagongjue' || replaceBlank(phone),
-        pwd: '123456',
-      })
-
-      console.log(res.data)
-
-      // navigation.replace('Home')
+      userStore.reqLogin(
+        {
+          name: '18751609896' || 'dagongjue' || replaceBlank(phone),
+          pwd: '123456',
+        },
+        (success: boolean) => {
+          if (success) {
+            navigation.replace('Home')
+          } else {
+            ToastAndroid.show('登陆失败，请检查用户名和密码', ToastAndroid.LONG)
+          }
+        },
+      )
     }
 
     const phoneOnChangeText = (v: string) => {
