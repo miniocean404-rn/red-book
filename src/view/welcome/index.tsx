@@ -15,7 +15,7 @@ const Welcome = () => {
       if (!res) {
         navigation.replace('Login')
       } else {
-        navigation.replace('Home')
+        navigation.replace('MainTab')
       }
     }, 3000)
 

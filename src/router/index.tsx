@@ -1,9 +1,12 @@
 import { RouterParamList } from '@/router/typings/stack-params-list'
 import { NavigationContainer } from '@react-navigation/native'
-import { TransitionPresets, createStackNavigator } from '@react-navigation/stack'
+import {
+  TransitionPresets,
+  createStackNavigator,
+} from '@react-navigation/stack'
 import Welcome from '@/view/welcome'
 import Login from '@/view/login'
-import Home from '@/view/home'
+import MainTab from '@/view/main-tab'
 
 const Stack = createStackNavigator<RouterParamList>()
 
@@ -47,8 +50,8 @@ const Router = () => {
           ></Stack.Screen>
 
           <Stack.Screen
-            name={'Home'}
-            component={Home}
+            name={'MainTab'}
+            component={MainTab}
             options={{
               headerShown: false,
               // 设置预设的页面跳转动画
