@@ -26,6 +26,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { formartPhone, replaceBlank } from '@/utils/string'
 import { request } from '@/utils/request/request'
+import { getUser } from '@/api/login'
 
 type LoginTypeDeclare = 'quick' | 'input'
 
@@ -348,14 +349,12 @@ const Login = () => {
     })
 
     const loginOnPress = async () => {
-      const res = await request.get('/user/login', {
-        data: {
-          name: replaceBlank(phone),
-          pwd: '123456',
-        },
+      const [_, res] = await getUser({
+        name: 'dagongjue' || replaceBlank(phone),
+        pwd: '123456',
       })
 
-      console.log(res)
+      console.log(res.data)
 
       // navigation.replace('Home')
     }
