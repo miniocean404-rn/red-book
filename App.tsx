@@ -2,14 +2,21 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { StatusBar } from 'react-native'
 import Router from '@/router'
+import { Provider } from 'react-redux'
+import { store } from '@/store'
 
 const App = (): JSX.Element => {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={'dark-content'} backgroundColor={'white'}></StatusBar>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <StatusBar
+          barStyle={'dark-content'}
+          backgroundColor={'white'}
+        ></StatusBar>
 
-      <Router></Router>
-    </SafeAreaProvider>
+        <Router></Router>
+      </SafeAreaProvider>
+    </Provider>
   )
 }
 

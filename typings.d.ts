@@ -8,12 +8,6 @@
 import * as ReactNative from 'react-native'
 
 declare global {
-  interface AlterFn {
-    (any): void
-  }
-
-  var alert: AlterFn
-
   declare module '*.svg'
   declare module '*.png'
   declare module '*.jpg'
@@ -22,14 +16,18 @@ declare global {
   declare module '*.bmp'
   declare module '*.tiff'
   declare module '*.webp'
+
+  declare var global: { HermesInternal: boolean } & globalThis
+
+  interface AlterFn {
+    (any): void
+  }
+
+  var alert: AlterFn
 }
 
 declare module 'react-native' {
   export interface UIManagerStatic {
     NativeInfoView: any
   }
-}
-
-type BaseProps = {
-  name: string
 }

@@ -1,6 +1,7 @@
 import { getUser } from '@/api/login'
 import { save } from '@/utils/storage'
 
+// ESM 单例模式 store
 class UserStore {
   userInfo: any = null
 

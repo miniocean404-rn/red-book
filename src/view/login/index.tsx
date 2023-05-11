@@ -28,7 +28,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { formartPhone, replaceBlank } from '@/utils/string'
 import { request } from '@/utils/request'
 import { getUser } from '@/api/login'
-import userStore from '@/store/user-store'
+import userStore from '@/store/esm-singleton/user-store'
 
 type LoginTypeDeclare = 'quick' | 'input'
 

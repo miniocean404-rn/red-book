@@ -19,7 +19,7 @@ export const UserAgent =
 export const ContentType = 'application/x-www-form-urlencoded'
 
 export const request = axios.create({
-  baseURL: 'http://192.168.31.5:7001',
+  baseURL: 'http://192.168.31.192:7001',
   timeout: 5000,
   withCredentials: true,
   responseType: 'json', //文档设置为document自动转化为DOM、text为文字、blob等
@@ -99,12 +99,14 @@ request.interceptors.response.use(
 
     if (axios.isCancel(err)) {
       console.log('已取消的重复请求：' + err.message)
+      return Promise.resolve({})
     } else {
       // 添加异常处理
 
       // 处理 http 状态码
       handleNetworkError(err.response?.status)
     }
+
     //根据上面的自定义状态码抛出错误
     return Promise.reject(err)
   },
