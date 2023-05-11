@@ -358,7 +358,7 @@ const Login = () => {
         },
         (success: boolean) => {
           if (success) {
-            navigation.replace('MainTab')
+            navigation.replace('MainTab', { name: 'MainTab' })
           } else {
             ToastAndroid.show('登陆失败，请检查用户名和密码', ToastAndroid.LONG)
           }
