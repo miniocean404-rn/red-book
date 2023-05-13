@@ -54,6 +54,7 @@ const Heart = ({ light, size = 20, onLightChange }: Props) => {
   }
 
   return (
+    // 必须使用 react native 的 TouchableOpacity 否则无法扩充按键的外观到 2 倍的样子
     <TouchableOpacity onPress={onPress}>
       <Image
         style={[styles.heart, { width: size, height: size }]}

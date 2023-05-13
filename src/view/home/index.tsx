@@ -7,8 +7,9 @@ import {
   Dimensions,
   ListRenderItemInfo,
   Image,
+  TouchableOpacity,
 } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import icon_heart from '@/assets/icon_heart.png'
 import icon_heart_empty from '@/assets/icon_heart_empty.png'
 import { useSelector } from 'react-redux'
@@ -18,6 +19,7 @@ import { HomeSliceType } from '@/store/feature/home-list.d'
 import FlowList from '@/components/flowlist/FlowList.js'
 import ResizeImage from '@/components/resize-image'
 import Heart from '@/components/heart'
+import TitleBar from '@/view/home/conponents/title-bar'
 
 const { width: Screen_Width, height } = Dimensions.get('window')
 
@@ -32,7 +34,9 @@ const Home = () => {
     init()
   }, [])
 
-  const init = async () => {}
+  const init = async () => {
+    dispatch(fetchHomeListApi(1))
+  }
   const onRefresh = () => {
     dispatch(fetchHomeListApi(-1))
   }
@@ -67,6 +71,13 @@ const Home = () => {
 
   return (
     <View style={styles.root}>
+      <TitleBar
+        tab={1}
+        onTabChange={(tab) => {
+          console.log(tab)
+        }}
+      ></TitleBar>
+
       {/* 封装瀑布流组件 */}
       <FlowList
         style={styles.flatList}
