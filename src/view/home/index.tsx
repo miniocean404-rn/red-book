@@ -5,8 +5,9 @@ import {
   Dimensions,
   ListRenderItemInfo,
   Image,
+  TouchableOpacity,
 } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from '@/store/index'
@@ -20,10 +21,14 @@ import CategoryList from '@/view/home/conponents/category-list'
 import { CategoryData, DEFAULT_CATEGORY_LIST } from '@/api/category'
 import Toast from '@/components/toast/Toast'
 import Loading from '@/components/loading/Loading'
+import { useNavigation } from '@react-navigation/native'
+import { RouterParamList } from '@/router/typings/stack-params-list'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 const { width: Screen_Width, height } = Dimensions.get('window')
 
 const Home = () => {
+  const navigation = useNavigation<StackNavigationProp<RouterParamList>>()
   const { list, isRefresh } = useSelector<RootState, HomeSliceType>(
     (state) => state.homeList,
   )
@@ -61,9 +66,16 @@ const Home = () => {
     )
   }
 
+  const onArticlePress = useCallback(
+    (article: ArticleSimple) => () => {
+      navigation.push('ArticleDetail', { id: article?.id || 1 })
+    },
+    [],
+  )
+
   const renderItem = ({ item }: ListRenderItemInfo<any>) => {
     return (
-      <View style={styles.item}>
+      <TouchableOpacity style={styles.item} onPress={onArticlePress(item)}>
         <ResizeImage uri={item?.image}></ResizeImage>
         <Text style={styles.titleTxt}>{item?.title}</Text>
 
@@ -77,7 +89,7 @@ const Home = () => {
           <Heart light={item?.isFavorite}></Heart>
           <Text style={styles.countTxt}>{item?.favoriteCount}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 

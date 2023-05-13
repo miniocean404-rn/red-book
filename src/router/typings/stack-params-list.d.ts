@@ -8,4 +8,5 @@ export type RouterParamList = {
   Mine: { name: 'Mine' }
   Publish: { name: 'Publish' }
   SearchGoods: undefined
+  ArticleDetail: { id: number }
 }

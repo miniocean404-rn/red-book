@@ -8,6 +8,7 @@ import Welcome from '@/view/welcome'
 import Login from '@/view/login'
 import MainTab from '@/view/main-tab'
 import SearchGoods from '@/view/search-goods'
+import ArticleDetail from '@/view/article-detail'
 
 const Stack = createStackNavigator<RouterParamList>()
 
@@ -53,6 +54,16 @@ const Router = () => {
           <Stack.Screen
             name={'MainTab'}
             component={MainTab}
+            options={{
+              headerShown: false,
+              // 设置预设的页面跳转动画
+              ...TransitionPresets.SlideFromRightIOS,
+            }}
+          ></Stack.Screen>
+
+          <Stack.Screen
+            name={'ArticleDetail'}
+            component={ArticleDetail}
             options={{
               headerShown: false,
               // 设置预设的页面跳转动画
