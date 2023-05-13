@@ -7,6 +7,7 @@ import {
 import Welcome from '@/view/welcome'
 import Login from '@/view/login'
 import MainTab from '@/view/main-tab'
+import SearchGoods from '@/view/search-goods'
 
 const Stack = createStackNavigator<RouterParamList>()
 
@@ -56,6 +57,17 @@ const Router = () => {
               headerShown: false,
               // 设置预设的页面跳转动画
               ...TransitionPresets.SlideFromRightIOS,
+            }}
+          ></Stack.Screen>
+
+          <Stack.Screen
+            name={'SearchGoods'}
+            component={SearchGoods}
+            options={{
+              headerShown: false,
+              // 这个屏幕应该是显示为 modal 弹窗的路由还是一个常规的 路由
+              // card 为下方有背景 transparentModal 是一个透明的背景的路由 modal 弹窗样式的路由
+              presentation: 'transparentModal',
             }}
           ></Stack.Screen>
         </Stack.Navigator>

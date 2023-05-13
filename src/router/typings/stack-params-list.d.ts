@@ -7,4 +7,5 @@ export type RouterParamList = {
   Message: { name: 'Message' }
   Mine: { name: 'Mine' }
   Publish: { name: 'Publish' }
+  SearchGoods: undefined
 }

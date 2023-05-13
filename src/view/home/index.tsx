@@ -1,17 +1,13 @@
 import {
-  FlatList,
-  ListRenderItem,
   StyleSheet,
   Text,
   View,
   Dimensions,
   ListRenderItemInfo,
   Image,
-  TouchableOpacity,
 } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import icon_heart from '@/assets/icon_heart.png'
-import icon_heart_empty from '@/assets/icon_heart_empty.png'
+import React, { useEffect } from 'react'
+
 import { useSelector } from 'react-redux'
 import { RootState, useAppDispatch } from '@/store/index'
 import { fetchHomeListApi } from '@/store/feature/home-list'
@@ -20,6 +16,10 @@ import FlowList from '@/components/flowlist/FlowList.js'
 import ResizeImage from '@/components/resize-image'
 import Heart from '@/components/heart'
 import TitleBar from '@/view/home/conponents/title-bar'
+import CategoryList from '@/view/home/conponents/category-list'
+import { CategoryData, DEFAULT_CATEGORY_LIST } from '@/api/category'
+import Toast from '@/components/toast/Toast'
+import Loading from '@/components/loading/Loading'
 
 const { width: Screen_Width, height } = Dimensions.get('window')
 
@@ -35,7 +35,9 @@ const Home = () => {
   }, [])
 
   const init = async () => {
-    dispatch(fetchHomeListApi(1))
+    Loading.show()
+    await dispatch(fetchHomeListApi(1))
+    Loading.hide()
   }
   const onRefresh = () => {
     dispatch(fetchHomeListApi(-1))
@@ -43,6 +45,20 @@ const Home = () => {
 
   const onEndReached = () => {
     dispatch(fetchHomeListApi(1))
+  }
+
+  const Header = () => {
+    const list = DEFAULT_CATEGORY_LIST.filter((i) => i.isAdd)
+
+    return (
+      <CategoryList
+        categoryList={list}
+        allCategoryList={list}
+        onCategoryChange={(category: CategoryData) => {
+          // console.log(JSON.stringify(category))
+        }}
+      />
+    )
   }
 
   const renderItem = ({ item }: ListRenderItemInfo<any>) => {
@@ -74,7 +90,7 @@ const Home = () => {
       <TitleBar
         tab={1}
         onTabChange={(tab) => {
-          console.log(tab)
+          Toast.show('切换了 tab')
         }}
       ></TitleBar>
 
@@ -94,6 +110,7 @@ const Home = () => {
         onEndReachedThreshold={0.1}
         onEndReached={onEndReached}
         ListFooterComponent={Footer}
+        ListHeaderComponent={Header}
       />
 
       {/* 原始使用 */}
@@ -131,9 +148,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  container: {
-    paddingTop: 6,
-  },
+  container: {},
   item: {
     width: (Screen_Width - 18) >> 1,
     backgroundColor: 'white',
