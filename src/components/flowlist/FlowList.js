@@ -269,13 +269,16 @@ export default class FlowList extends React.PureComponent {
                   const preAllLoaded = !JSON.parse(
                     JSON.stringify(this._itemHeights),
                   ).some((o) => o === null)
+
                   this._itemHeights[index] = height
                   const allLoaded = !JSON.parse(
                     JSON.stringify(this._itemHeights),
                   ).some((o) => o === null)
+
                   if (allLoaded) {
                     if (preAllLoaded) {
                       this._itemDidUpdates[index] = 2
+
                       if (
                         preHeight &&
                         height &&

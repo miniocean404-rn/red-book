@@ -1,50 +1,50 @@
-import React from 'react';
-import { View, Text, ActivityIndicator, Image, Dimensions } from 'react-native';
-import TopView from './TopView';
-const { width } = Dimensions.get('screen');
+import React from 'react'
+import { View, Text, ActivityIndicator, Image, Dimensions } from 'react-native'
+import TopView from './TopView'
+const { width } = Dimensions.get('screen')
 
-const LoadingOptions: any = {};
+const LoadingOptions: any = {}
 
 export default class Loading {
-
-    static setLoadingOptions(options: any = {}) {
-        if (typeof options.text === 'string') {
-            LoadingOptions.text = options.text;
-        }
-        if (typeof options.loadingBackgroundColor === 'string') {
-            LoadingOptions.loadingBackgroundColor =
-                options.loadingBackgroundColor;
-        }
-        if (options.loadingImage != undefined) {
-            LoadingOptions.loadingImage = options.loadingImage;
-        }
-        if (
-            typeof options.loadingViewStyle === 'object' &&
-            !Array.isArray(options.loadingViewStyle)
-        ) {
-            LoadingOptions.loadingViewStyle = options.loadingViewStyle;
-        }
-        if (
-            typeof options.loadingTextStyle === 'object' &&
-            !Array.isArray(options.loadingTextStyle)
-        ) {
-            LoadingOptions.loadingTextStyle = options.loadingTextStyle;
-        }
+  static setLoadingOptions(options: any = {}) {
+    if (typeof options.text === 'string') {
+      LoadingOptions.text = options.text
     }
+    if (typeof options.loadingBackgroundColor === 'string') {
+      LoadingOptions.loadingBackgroundColor = options.loadingBackgroundColor
+    }
+    if (options.loadingImage != undefined) {
+      LoadingOptions.loadingImage = options.loadingImage
+    }
+    if (
+      typeof options.loadingViewStyle === 'object' &&
+      !Array.isArray(options.loadingViewStyle)
+    ) {
+      LoadingOptions.loadingViewStyle = options.loadingViewStyle
+    }
+    if (
+      typeof options.loadingTextStyle === 'object' &&
+      !Array.isArray(options.loadingTextStyle)
+    ) {
+      LoadingOptions.loadingTextStyle = options.loadingTextStyle
+    }
+  }
 
   static show(
     textContent = LoadingOptions.text && LoadingOptions.text.length > 0
       ? LoadingOptions.text
-      : '加载中...'
+      : '加载中...',
   ) {
     const loadingBackgroundColor = LoadingOptions.loadingBackgroundColor
       ? LoadingOptions.loadingBackgroundColor
-      : 'rgba(0,0,0,0.0)';
+      : 'rgba(0,0,0,0.0)'
+
     const loadingViewBackgroundColor =
       LoadingOptions.loadingViewStyle &&
       LoadingOptions.loadingViewStyle.backgroundColor
         ? LoadingOptions.loadingViewStyle.backgroundColor
-        : 'rgba(0,0,0,0.8)';
+        : 'rgba(0,0,0,0.8)'
+
     const loadingView = (
       <View
         style={{
@@ -100,23 +100,23 @@ export default class Loading {
           </Text>
         </View>
       </View>
-    );
-    TopView.addLoading(loadingView);
+    )
+    TopView.addLoading(loadingView)
   }
 
   static hide() {
-    TopView.removeLoading();
+    TopView.removeLoading()
   }
 
   static transformRoot(
     transform: any,
     animated: boolean,
-    animatesOnly: boolean = false
+    animatesOnly: boolean = false,
   ) {
-    TopView.transform(transform, animated, animatesOnly);
+    TopView.transform(transform, animated, animatesOnly)
   }
 
   static restoreRoot(animated: boolean, animatesOnly: boolean = false) {
-    TopView.restore(animated, animatesOnly);
+    TopView.restore(animated, animatesOnly)
   }
 }
