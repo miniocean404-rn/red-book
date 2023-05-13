@@ -10,7 +10,7 @@ export const homeListApi = (params: any): any => {
         resolve([null, res])
       })
       .catch((err) => {
-        resolve([err, undefined])
+        resolve([err, null])
       })
   })
 }

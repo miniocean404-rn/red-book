@@ -16,6 +16,7 @@ declare global {
   declare module '*.bmp'
   declare module '*.tiff'
   declare module '*.webp'
+  declare module '*.js'
 
   declare var global: { HermesInternal: boolean } & globalThis
 

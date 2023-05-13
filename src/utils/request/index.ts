@@ -39,13 +39,6 @@ export const request = axios.create({
     return Qs.stringify(params, { arrayFormat: 'brackets' })
   },
 
-  // 请求后的数据处理 (responseType 的处理)
-  transformResponse: [
-    function (data: AxiosResponse) {
-      return data
-    },
-  ],
-
   // 自定义错误状态码范围
   validateStatus: function (status: number) {
     return status >= 200 && status < 400
