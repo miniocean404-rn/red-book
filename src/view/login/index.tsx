@@ -9,7 +9,7 @@ import {
   LayoutAnimation,
   ToastAndroid,
 } from 'react-native'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import logo from '@/assets/icon_main_logo.png'
 import icon_unselected from '@/assets/icon_unselected.png'
 import icon_selected from '@/assets/icon_selected.png'
@@ -29,17 +29,47 @@ import { formartPhone, replaceBlank } from '@/utils/string'
 import { request } from '@/utils/request'
 import { getUser } from '@/api/login'
 import userStore from '@/store/esm-singleton/user-store'
+import { ScrollView } from 'react-native-gesture-handler'
 
 type LoginTypeDeclare = 'quick' | 'input'
 
 const Login = () => {
   const navigation = useNavigation<StackNavigationProp<RouterParamList>>()
 
+  const usernameInput = useRef<TextInput>(null)
+  const passwordInput = useRef<TextInput>(null)
+
   const [loginType, setLoginType] = useState<LoginTypeDeclare>('quick')
   const [isCheck, setIsCheck] = useState<boolean>(false)
   const [isEyeOpen, setIsEyeOpen] = useState<boolean>(true)
   const [phone, setPhone] = useState<string>('')
   const [pwd, setPwd] = useState<string>('')
+
+  const radioOnPress = async () => {
+    setIsCheck(!isCheck)
+    navigation.replace('MainTab')
+  }
+
+  const loginOnPress = async () => {
+    // !不收起键盘，进行路由导航在生产环境会导致白屏的 bug
+    // 解决方案：手动失焦 或者 使用滚动组件的 keyboardDismissMode = 'on-drag' && keyboardShouldPersistTaps={'never'}
+    // usernameInput.current?.blur()
+    // passwordInput.current?.blur()
+
+    userStore.reqLogin(
+      {
+        name: '18751609896' || 'dagongjue' || replaceBlank(phone),
+        pwd: '123456',
+      },
+      (success: boolean) => {
+        if (success) {
+          navigation.replace('MainTab')
+        } else {
+          ToastAndroid.show('登陆失败，请检查用户名和密码', ToastAndroid.LONG)
+        }
+      },
+    )
+  }
 
   const quickRender = () => {
     const styles = StyleSheet.create({
@@ -127,10 +157,6 @@ const Login = () => {
       },
     })
 
-    const radioOnPress = async () => {
-      setIsCheck(!isCheck)
-    }
-
     const protocolOnPress = async () => {
       await Linking.openURL('https://www.baidu.com')
     }
@@ -200,7 +226,7 @@ const Login = () => {
         width: '100%',
         height: '100%',
         flexDirection: 'column',
-        alignItems: 'center',
+        // alignItems: 'center',
         paddingHorizontal: 48,
       },
       pwdLogin: {
@@ -350,25 +376,10 @@ const Login = () => {
       },
     })
 
-    const loginOnPress = async () => {
-      userStore.reqLogin(
-        {
-          name: '18751609896' || 'dagongjue' || replaceBlank(phone),
-          pwd: '123456',
-        },
-        (success: boolean) => {
-          if (success) {
-            navigation.replace('MainTab')
-          } else {
-            // ToastAndroid.show('登陆失败，请检查用户名和密码', ToastAndroid.LONG)
-          }
-        },
-      )
-    }
-
     const phoneOnChangeText = (v: string) => {
       setPhone(formartPhone(v))
     }
+
     const pwdOnChangeText = (v: string) => {
       setPwd(v)
     }
@@ -376,7 +387,12 @@ const Login = () => {
     const canLogin = phone?.length === 13 && pwd?.length === 6
 
     return (
-      <View style={styles.root}>
+      <ScrollView
+        style={styles.root}
+        contentContainerStyle={{ alignItems: 'center' }}
+        keyboardDismissMode={'on-drag'}
+        keyboardShouldPersistTaps={'never'}
+      >
         <Text style={styles.pwdLogin}>密码登录</Text>
         <Text style={styles.tip}>未注册的手机号登录成功后将自动注册</Text>
 
@@ -385,6 +401,7 @@ const Login = () => {
           <Image style={styles.triangle} source={icon_triangle}></Image>
 
           <TextInput
+            ref={usernameInput}
             style={styles.phoneInput}
             placeholderTextColor={'#bbb'}
             placeholder="请输入手机号码"
@@ -398,6 +415,7 @@ const Login = () => {
 
         <View style={[styles.phoneLayout, styles.pwdLayout]}>
           <TextInput
+            ref={passwordInput}
             style={[styles.phoneInput, styles.pwdInput]}
             placeholderTextColor={'#bbb'}
             placeholder="请输入手机密码"
@@ -463,7 +481,7 @@ const Login = () => {
         >
           <Image style={styles.closeImg} source={icon_close_modal}></Image>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     )
   }
 

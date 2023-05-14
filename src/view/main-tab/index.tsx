@@ -65,7 +65,6 @@ export default MainTab
 
 const styles = StyleSheet.create({
   root: {
-    position: 'absolute',
     width: '100%',
     height: '100%',
   },

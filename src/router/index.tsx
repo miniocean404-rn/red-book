@@ -82,7 +82,8 @@ const Router = () => {
               headerShown: true,
               // 这个屏幕应该是显示为 modal 弹窗的路由还是一个常规的 路由
               // card 为下方有背景 transparentModal 是一个透明的背景的路由 modal 弹窗样式的路由
-              presentation: 'transparentModal',
+              presentation: 'card',
+              ...TransitionPresets.ModalSlideFromBottomIOS,
             }}
           ></Stack.Screen>
         </Stack.Navigator>

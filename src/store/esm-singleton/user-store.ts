@@ -11,19 +11,21 @@ class UserStore {
   async reqLogin(params: any, callback?: Function) {
     const [_, res] = await getUser(params)
 
+    if (_) {
+      console.error(_.message)
+      return
+    }
+
     if (res.data) {
       this.userInfo = res.data
       await save('userInfo', JSON.stringify(this.userInfo))
 
       ToastAndroid.show(`${JSON.stringify(res.data)}`, 3000)
+
       callback?.(true)
     } else {
       this.userInfo = null
       callback?.(false)
-    }
-
-    if (_) {
-      console.error(_.message)
     }
   }
 

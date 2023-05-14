@@ -58,3 +58,14 @@ https://blog.csdn.net/ych1274816963/article/details/120967009
 
 1. 更简单的构建 react native 的平台，不用搭建 XCode（iOS）或 Android Studio 直接使用
 2. Expo 允许你在手机、模拟器或浏览器上看到你正在进行的应用程序
+
+### Bug
+
+1. 不收起键盘，进行路由导航在生产环境会导致白屏的 bug
+
+   ```js
+   // 解决方案：手动失焦
+   // 或者 使用滚动组件的 keyboardDismissMode = 'on-drag' && keyboardShouldPersistTaps={'never'}
+   usernameInput.current?.blur()
+   passwordInput.current?.blur()
+   ```

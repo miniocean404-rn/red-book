@@ -4,13 +4,15 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android-source-map": "react-native bundle --dev false --platform android  --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.bundle.map",
-    "android-build-release": "cd android && ./gradlew assembleRelease",
+    "android-build-release": "cd android  && ./gradlew assembleRelease",
+    "app-install-release": "cd android/app/build/outputs/apk/release && adb install -r ./app-release.apk",
+    "app-build-install": "yarn android-build-release && yarn app-install-release",
     "android-patch-package": "pushy bundle --platform android",
+    "android-source-map": "react-native bundle --dev false --platform android  --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.bundle.map",
     "ios": "react-native run-ios",
-    "ios-source-map": "react-native bundle --dev false --platform ios  --entry-file index.js  --reset-cache  --bundle-output main.jsbundle  --sourcemap-output main.jsbundle.map",
     "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/bundle/index.jsbundle --assets-dest ./ios/bundle",
     "ios-patch-package": "pushy bundle --platform ios",
+    "ios-source-map": "react-native bundle --dev false --platform ios  --entry-file index.js  --reset-cache  --bundle-output main.jsbundle  --sourcemap-output main.jsbundle.map",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest"

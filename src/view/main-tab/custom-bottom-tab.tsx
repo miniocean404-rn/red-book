@@ -6,6 +6,7 @@ import {
   ImagePickerResponse,
   launchImageLibrary,
 } from 'react-native-image-picker'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const CustomBottomTab = (bottomTabProps: BottomTabBarProps) => {
   const { state, descriptors, navigation } = bottomTabProps
