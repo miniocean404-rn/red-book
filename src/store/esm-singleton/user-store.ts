@@ -1,16 +1,18 @@
 import { getUser } from '@/api/login'
-import { save } from '@/utils/storage'
+import { load, save } from '@/utils/storage'
 
 // ESM 单例模式 store
 class UserStore {
   userInfo: any = null
+
+  // static {}
 
   async reqLogin(params: any, callback?: Function) {
     const [_, res] = await getUser(params)
 
     if (res.data) {
       this.userInfo = res.data
-      save('userInfo', this.userInfo)
+      await save('userInfo', JSON.stringify(this.userInfo))
 
       callback?.(true)
     } else {
@@ -21,6 +23,10 @@ class UserStore {
     if (_) {
       console.error(_.message)
     }
+  }
+
+  async loadUserInfo() {
+    this.userInfo = await load('userInfo')
   }
 }
 

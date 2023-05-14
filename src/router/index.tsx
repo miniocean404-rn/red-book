@@ -20,7 +20,7 @@ const Router = () => {
         {/* 管理子屏幕的导航器组件 */}
         <Stack.Navigator
           // initialRouteName 默认打开的页面
-          initialRouteName={'Welcome'}
+          initialRouteName={'Mine'}
           screenOptions={{
             cardStyle: {
               // 提高页面导航栈层级，避免出现 B 页面透过能看到 A 页面情况
