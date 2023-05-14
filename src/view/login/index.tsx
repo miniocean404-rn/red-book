@@ -360,7 +360,7 @@ const Login = () => {
           if (success) {
             navigation.replace('MainTab')
           } else {
-            ToastAndroid.show('登陆失败，请检查用户名和密码', ToastAndroid.LONG)
+            // ToastAndroid.show('登陆失败，请检查用户名和密码', ToastAndroid.LONG)
           }
         },
       )

@@ -9,6 +9,7 @@ import Login from '@/view/login'
 import MainTab from '@/view/main-tab'
 import SearchGoods from '@/view/search-goods'
 import ArticleDetail from '@/view/article-detail'
+import StatusPlaceHolder from '@/components/status-placeholder'
 
 const Stack = createStackNavigator<RouterParamList>()
 
@@ -26,6 +27,9 @@ const Router = () => {
               // 提高页面导航栈层级，避免出现 B 页面透过能看到 A 页面情况
               elevation: 1,
             },
+            header(props) {
+              return <StatusPlaceHolder></StatusPlaceHolder>
+            },
           }}
         >
           {/* 用于指定路由配置的组件 */}
@@ -34,7 +38,7 @@ const Router = () => {
             component={Welcome}
             options={{
               // 隐藏系统自带的标题栏
-              headerShown: false,
+              headerShown: true,
 
               // 设置预设的页面跳转动画
               ...TransitionPresets.SlideFromRightIOS,
@@ -45,7 +49,7 @@ const Router = () => {
             name={'Login'}
             component={Login}
             options={{
-              headerShown: false,
+              headerShown: true,
               // 设置预设的页面跳转动画
               ...TransitionPresets.SlideFromRightIOS,
             }}
@@ -65,7 +69,7 @@ const Router = () => {
             name={'ArticleDetail'}
             component={ArticleDetail}
             options={{
-              headerShown: false,
+              headerShown: true,
               // 设置预设的页面跳转动画
               ...TransitionPresets.SlideFromRightIOS,
             }}
@@ -75,7 +79,7 @@ const Router = () => {
             name={'SearchGoods'}
             component={SearchGoods}
             options={{
-              headerShown: false,
+              headerShown: true,
               // 这个屏幕应该是显示为 modal 弹窗的路由还是一个常规的 路由
               // card 为下方有背景 transparentModal 是一个透明的背景的路由 modal 弹窗样式的路由
               presentation: 'transparentModal',
