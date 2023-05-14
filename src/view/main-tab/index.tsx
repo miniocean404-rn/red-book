@@ -7,7 +7,6 @@ import Shop from '@/view/shop'
 import Message from '@/view/message'
 import Mine from '@/view/mine'
 
-import Publish from '@/view/publish'
 import CustomBottomTab from '@/view/main-tab/custom-bottom-tab'
 import { systemBottomBar } from '@/view/main-tab/system-bottom-tab'
 
@@ -28,6 +27,7 @@ const MainTab = () => {
           component={Home}
           options={{ title: '首页', headerShown: false }}
         />
+
         <BottomTab.Screen
           name={'Shop'}
           component={Shop}
@@ -36,7 +36,7 @@ const MainTab = () => {
 
         <BottomTab.Screen
           name={'Publish'}
-          component={Publish}
+          component={View}
           options={{ title: '发布', headerShown: false }}
         />
 
@@ -45,6 +45,7 @@ const MainTab = () => {
           component={Message}
           options={{ title: '消息', headerShown: false }}
         />
+
         <BottomTab.Screen
           name={'Mine'}
           component={Mine}

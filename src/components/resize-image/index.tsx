@@ -14,10 +14,16 @@ const ResizeImage = ({ uri }: Props) => {
   const [height, setHeight] = useState<number>(200)
 
   useEffect(() => {
-    Image.getSize(uri, (width: number, height: number) => {
-      const showHeight = (ShowWidth * height) / width
-      setHeight(showHeight)
-    })
+    Image.getSize(
+      uri,
+      (width: number, height: number) => {
+        const showHeight = (ShowWidth * height) / width
+        setHeight(showHeight)
+      },
+      (err) => {
+        console.log('获取尺寸失败:', err)
+      },
+    )
 
     return () => {}
   }, [uri])

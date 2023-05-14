@@ -42,7 +42,7 @@ const TitleBar = ({ tab, onTabChange }: Props) => {
         }}
       >
         <Text style={tabIndex === 1 ? styles.tabTxtSelect : styles.tabTxt}>
-          发现
+          发现1
         </Text>
         {tabIndex === 1 && <View style={styles.line}></View>}
       </TouchableOpacity>

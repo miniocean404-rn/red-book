@@ -4,8 +4,11 @@ import { StatusBar } from 'react-native'
 import Router from '@/router'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
+import { UseCheckHotUpdate } from '@/utils/check-update'
 
 const App = (): JSX.Element => {
+  UseCheckHotUpdate()
+
   return (
     <Provider store={store}>
       <SafeAreaProvider>

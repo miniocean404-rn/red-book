@@ -28,6 +28,24 @@
    export default new UserStore()
    ```
 
+### 打包教学
+
+https://blog.csdn.net/ych1274816963/article/details/120967009
+
+### 热修复
+
+1. 安装依赖
+
+   ```js
+   # 先全局安装命令行工具，每台电脑只用装一次
+   yarn global add  react-native-update-cli --ignore-engines
+
+   # 然后在项目目录中安装热更新模块
+   yarn add react-native-update
+   ```
+
+2. 集成文档：https://pushy.reactnative.cn/docs/getting-started.html
+
 ### React Native Debugger 使用
 
 博客：https://blog.csdn.net/A15029296293/article/details/129841557
@@ -35,3 +53,8 @@
 ### 库
 
 轮播图：react-native-snap-carousel
+
+### expo
+
+1. 更简单的构建 react native 的平台，不用搭建 XCode（iOS）或 Android Studio 直接使用
+2. Expo 允许你在手机、模拟器或浏览器上看到你正在进行的应用程序

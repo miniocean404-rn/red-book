@@ -1,12 +1,12 @@
 export type RouterParamList = {
-  Welcome: { name: 'Welcome'; foo: string; onBar: () => void }
-  Login: { name: 'Login' }
-  MainTab: { name: 'MainTab' }
-  Home: { name: 'Home' }
-  Shop: { name: 'Shop' }
-  Message: { name: 'Message' }
-  Mine: { name: 'Mine' }
-  Publish: { name: 'Publish' }
+  Welcome: { onBar: () => void }
+  Login: undefined
+  MainTab: undefined
+  Home: undefined
+  Shop: undefined
+  Message: undefined
+  Mine: undefined
+  Publish: undefined
   SearchGoods: undefined
   ArticleDetail: { id: number }
 }

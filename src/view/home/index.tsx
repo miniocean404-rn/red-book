@@ -41,7 +41,6 @@ const Home = () => {
 
   const init = async () => {
     Loading.show()
-    await dispatch(fetchHomeListApi(1))
     Loading.hide()
   }
   const onRefresh = () => {
@@ -75,21 +74,25 @@ const Home = () => {
 
   const renderItem = ({ item }: ListRenderItemInfo<any>) => {
     return (
-      <TouchableOpacity style={styles.item} onPress={onArticlePress(item)}>
-        <ResizeImage uri={item?.image}></ResizeImage>
-        <Text style={styles.titleTxt}>{item?.title}</Text>
+      <>
+        {item && (
+          <TouchableOpacity style={styles.item} onPress={onArticlePress(item)}>
+            <ResizeImage uri={item?.image}></ResizeImage>
+            <Text style={styles.titleTxt}>{item?.title}</Text>
 
-        <View style={styles.nameLayout}>
-          <Image
-            style={styles.avatarImg}
-            source={{ uri: item?.avatarUrl }}
-          ></Image>
-          <Text style={styles.nameTxt}>{item?.userName}</Text>
+            <View style={styles.nameLayout}>
+              <Image
+                style={styles.avatarImg}
+                source={{ uri: item?.avatarUrl }}
+              ></Image>
+              <Text style={styles.nameTxt}>{item?.userName}</Text>
 
-          <Heart light={item?.isFavorite}></Heart>
-          <Text style={styles.countTxt}>{item?.favoriteCount}</Text>
-        </View>
-      </TouchableOpacity>
+              <Heart light={item?.isFavorite}></Heart>
+              <Text style={styles.countTxt}>{item?.favoriteCount}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      </>
     )
   }
 
