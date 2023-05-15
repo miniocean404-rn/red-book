@@ -1,4 +1,21 @@
-<!-- 解决不能直接访问http协议 -->
+<!-- 解决不能直接访问http协议及抓包问题 -->
 <network-security-config>
-    <base-config cleartextTrafficPermitted="true"/>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" overridePins="true" /> <!--信任系统证书-->
+            <certificates src="user" overridePins="true" /> <!--信任用户证书-->
+        </trust-anchors>
+    </base-config>
 </network-security-config>
+
+
+
+<!--上线使用-->
+<!--<network-security-config
+    xmlns:tools="http://schemas.android.com/tools">
+    <base-config cleartextTrafficPermitted="true" />
+    <trust-anchors tools:ignore="NetworkSecurityConfig">
+        <certificates src="system" overridePins="true" />
+        <certificates src="user" overridePins="true" />
+    </trust-anchors>
+</network-security-config>-->
