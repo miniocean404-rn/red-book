@@ -69,3 +69,11 @@ https://blog.csdn.net/ych1274816963/article/details/120967009
    usernameInput.current?.blur()
    passwordInput.current?.blur()
    ```
+
+### cocoapod install 依赖缓慢
+
+开启 clashX 终端代理
+
+```shell
+export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
+```
