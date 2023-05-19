@@ -13,7 +13,7 @@
     "ios": "react-native run-ios",
     "cocoapod-install-dep-detail": "cd ios && pod install --verbose",
     "start-mac-simulator": "open -a Simulator.app",
-    "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/bundle/index.jsbundle --assets-dest ./ios/bundle",
+    "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/index.jsbundle --assets-dest ./ios",
     "ios-patch-package": "pushy bundle --platform ios",
     "ios-source-map": "react-native bundle --dev false --platform ios  --entry-file index.js  --reset-cache  --bundle-output main.jsbundle  --sourcemap-output main.jsbundle.map",
     "lint": "eslint .",
