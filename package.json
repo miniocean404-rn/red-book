@@ -16,6 +16,7 @@
     "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/index.jsbundle --assets-dest ./ios",
     "ios-patch-package": "pushy bundle --platform ios",
     "ios-source-map": "react-native bundle --dev false --platform ios  --entry-file index.js  --reset-cache  --bundle-output main.jsbundle  --sourcemap-output main.jsbundle.map",
+    "build-ios-.app-release": "npx react-native run-ios --configuration Release",
     "lint": "eslint .",
     "test": "jest"
   },
