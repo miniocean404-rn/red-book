@@ -1,5 +1,6 @@
 import { Platform } from 'react-native'
 
+// 如果打包 iOS 时 iOS 没有集成，打包安装后启动会闪退，需要注释
 import _updateConfig from '@/../update.json'
 import {
   CheckResult,
