@@ -11,7 +11,7 @@
     "android-patch-package": "pushy bundle --platform android",
     "android-source-map": "react-native bundle --dev false --platform android  --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --sourcemap-output android/app/src/main/assets/index.android.bundle.map",
     "ios": "react-native run-ios",
-    "build-ios-.app-release": "npx react-native run-ios --configuration Release",
+    "build-ios-.app-release": "react-native run-ios --mode Release",
     "cocoapod-install-dep-detail": "cd ios && pod install --verbose",
     "start-mac-simulator": "open -a Simulator.app",
     "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/index.jsbundle --assets-dest ./ios",
