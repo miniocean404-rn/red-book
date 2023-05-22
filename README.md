@@ -78,8 +78,8 @@ https://blog.csdn.net/ych1274816963/article/details/120967009
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
 ```
 
-### 启动及打包可以添加 simulator 指定设备
+### 启动及打包可以添加 simulator 指定设备 port 指定端口
 
 ```shell
---simulator 'iPhone 14'
+--simulator 'iPhone 14' --port xxxx
 ```
